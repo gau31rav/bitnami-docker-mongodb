@@ -50,6 +50,7 @@ mongodb_env_vars=(
     MONGODB_PRIMARY_PORT_NUMBER
     MONGODB_PRIMARY_ROOT_PASSWORD
     MONGODB_PRIMARY_ROOT_USER
+    MONGODB_USER_ROLE
 )
 for env_var in "${mongodb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -113,6 +114,7 @@ export MONGODB_USERNAME="${MONGODB_USERNAME:-}"
 export MONGODB_PASSWORD="${MONGODB_PASSWORD:-}"
 export MONGODB_DATABASE="${MONGODB_DATABASE:-}"
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
+export MONGODB_USER_ROLE="${MONGODB_USER_ROLE:-readWrite}"
 
 # MongoDB replica set configuration
 export MONGODB_REPLICA_SET_MODE="${MONGODB_REPLICA_SET_MODE:-}"
