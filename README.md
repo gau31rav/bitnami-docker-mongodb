@@ -48,10 +48,10 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4.4`, `4.4-debian-10`, `4.4.4`, `4.4.4-debian-10-r49`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.4-debian-10-r49/4.4/debian-10/Dockerfile)
-* [`4.2`, `4.2-debian-10`, `4.2.13`, `4.2.13-debian-10-r15` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.13-debian-10-r15/4.2/debian-10/Dockerfile)
-* [`4.0`, `4.0-debian-9`, `4.0.23`, `4.0.23-debian-9-r41` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.23-debian-9-r41/4.0/debian-9/Dockerfile)
-* [`3.6`, `3.6-debian-9`, `3.6.23`, `3.6.23-debian-9-r15` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.23-debian-9-r15/3.6/debian-9/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.8`, `4.4.8-debian-10-r11`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.8-debian-10-r11/4.4/debian-10/Dockerfile)
+* [`4.2`, `4.2-debian-10`, `4.2.15`, `4.2.15-debian-10-r35` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.15-debian-10-r35/4.2/debian-10/Dockerfile)
+* [`4.0`, `4.0-debian-9`, `4.0.26`, `4.0.26-debian-9-r19` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.26-debian-9-r19/4.0/debian-9/Dockerfile)
+* [`3.6`, `3.6-debian-9`, `3.6.23`, `3.6.23-debian-9-r130` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.23-debian-9-r130/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -225,6 +225,10 @@ services:
   ...
 ```
 
+## Using numactl
+
+  In order to enable launching commands using numactl, set the `MONGODB_ENABLE_NUMACTL` variable to true. For more information on this, check the official [MongoDB documentation][(https://docs.mongodb.com/manual/administration/production-notes/#configuring-numa-on-linux)
+
 ## Enabling/disabling IPv6
 
 Enabling/disabling IPv6 is possible through the following env var:
@@ -268,6 +272,28 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MONGODB_ENABLE_DIRECTORY_PER_DB=yes
+  ...
+```
+
+## Enabling/disabling journaling
+
+Enabling/disabling [journal](https://docs.mongodb.com/manual/reference/configuration-options/#mongodb-setting-storage.journal.enabled) is possible through the following env var:
+
+- `MONGODB_ENABLE_JOURNAL`: Whether to enable/disable journaling on MongoDB&reg;. Default: `true`. Possible values: `[true, false]`
+
+```console
+$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_JOURNAL=true bitnami/mongodb:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  mongodb:
+  ...
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_ENABLE_JOURNAL=true
   ...
 ```
 
